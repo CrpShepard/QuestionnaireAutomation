@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Адрес места жительства" />
+    <TextView
+        android:id="@+id/textViewAddressPassport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="По паспорту" />
+    <EditText
+        android:id="@+id/editTextAddressPassportIndex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Почтовый индекс" />
+
+    <EditText
+        android:id="@+id/editTextAddressPassport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Адрес" />
+
+    <TextView
+        android:id="@+id/textViewAddressFactual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Фактический" />
+    <EditText
+        android:id="@+id/editTextAddressFactualIndex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Почтовый индекс" />
+
+    <EditText
+        android:id="@+id/editTextAddressFactual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Адрес" />
+
+    <TextView
+        android:id="@+id/textViewMilitary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Отношение к воинской обязанности" />
+
+    <TextView
+        android:id="@+id/textViewMilitaryStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Призывник / военнообязанный(ая) / невоеннообязанный(ая)" />
+
+    <EditText
+        android:id="@+id/editTextMilitaryStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="" />
+
+    <TextView
+        android:id="@+id/textViewMilitaryRank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Воинское звание" />
+
+    <EditText
+        android:id="@+id/editTextMilitaryRank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="" />
+
+</LinearLayout>

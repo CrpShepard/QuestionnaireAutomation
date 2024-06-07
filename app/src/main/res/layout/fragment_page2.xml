@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewPassport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Паспорт" />
+    <EditText
+        android:id="@+id/editTextPassportSerial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Серия" />
+
+    <EditText
+        android:id="@+id/editTextPassportNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="№" />
+
+    <EditText
+        android:id="@+id/editTextPassportGivenBy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Выдан" />
+
+    <EditText
+        android:id="@+id/editTextPassportGivenDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Дата выдачи" />
+
+    <TextView
+        android:id="@+id/textViewSNILS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Страховое свидетельство государственного пенсионного страхования " />
+
+    <EditText
+        android:id="@+id/editTextSNILS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="СНИЛС №" />
+
+    <TextView
+        android:id="@+id/textViewINN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Идентификационный номер налогоплательщика  " />
+
+    <EditText
+        android:id="@+id/editTextINN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ИНН №" />
+
+    <TextView
+        android:id="@+id/textViewPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Номер телефона" />
+
+    <EditText
+        android:id="@+id/editTextPhoneMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Мобильный" />
+
+    <EditText
+        android:id="@+id/editTextPhoneHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Домашний" />
+
+</LinearLayout>
