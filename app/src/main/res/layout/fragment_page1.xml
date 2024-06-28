@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:padding="16dp">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -35,71 +42,25 @@
         android:layout_marginTop="16dp"
 
         android:text="Пол" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="4dp">
 
-        <LinearLayout
+    <RadioGroup
+        android:id="@+id/radioGroupSex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButtonMale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="2dp">
+            android:text="М" />
 
-            <TextView
-                android:id="@+id/textViewColorLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Мужской"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:padding="2dp">
-
-            <CheckBox
-                android:id="@+id/checkBoxSexM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="4dp">
-
-        <LinearLayout
+        <RadioButton
+            android:id="@+id/radioButtonFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="2dp">
-
-            <TextView
-                android:id="@+id/textViewBoldLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Женский"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:padding="2dp">
-
-            <CheckBox
-                android:id="@+id/checkBoxSexF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </LinearLayout>
+            android:text="Ж" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/textViewBirthDay"
@@ -144,4 +105,122 @@
         android:layout_height="wrap_content"
         android:hint="Гражданство" />
 
+    <TextView
+        android:id="@+id/textViewPassport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Паспорт" />
+    <EditText
+        android:id="@+id/editTextPassportSerial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Серия" />
+
+    <EditText
+        android:id="@+id/editTextPassportNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="№" />
+
+    <EditText
+        android:id="@+id/editTextPassportGivenBy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Выдан" />
+
+    <EditText
+        android:id="@+id/editTextPassportGivenDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Дата выдачи" />
+
+    <TextView
+        android:id="@+id/textViewSNILS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Страховое свидетельство государственного пенсионного страхования " />
+
+    <EditText
+        android:id="@+id/editTextSNILS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="СНИЛС №" />
+
+    <TextView
+        android:id="@+id/textViewINN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Идентификационный номер налогоплательщика  " />
+
+    <EditText
+        android:id="@+id/editTextINN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ИНН №" />
+
+    <TextView
+        android:id="@+id/textViewPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Номер телефона" />
+
+    <EditText
+        android:id="@+id/editTextPhoneMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Мобильный" />
+
+    <EditText
+        android:id="@+id/editTextPhoneHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Домашний" />
+
+    <TextView
+        android:id="@+id/textViewAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Адрес места жительства" />
+    <TextView
+        android:id="@+id/textViewAddressPassport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="По паспорту" />
+    <EditText
+        android:id="@+id/editTextAddressPassportIndex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Почтовый индекс" />
+
+    <EditText
+        android:id="@+id/editTextAddressPassport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Адрес" />
+
+    <TextView
+        android:id="@+id/textViewAddressFactual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Фактический" />
+    <EditText
+        android:id="@+id/editTextAddressFactualIndex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Почтовый индекс" />
+
+    <EditText
+        android:id="@+id/editTextAddressFactual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Адрес" />
+
 </LinearLayout>
+</ScrollView>

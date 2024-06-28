@@ -1,239 +1,186 @@
 package com.example.questionnaireautomation
 
+import android.content.DialogInterface
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.ProgressBar
+import android.widget.RadioButton
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.OutputStreamWriter
-import java.nio.charset.Charset
 
 class FormActivity : AppCompatActivity() {
-
-    private var currentIndex = 0
-    private var k = 1
-    private val formElements = mutableListOf<View>()
     private val headersList = mutableListOf<String>()
-    private val answersList = mutableListOf<String>()
+    private val answersList = MutableList(42){""} // всего 79 полей
+
+    val titles = arrayOf(
+        "Личные данные",
+        "Отношение к воинской обязанности",
+        "Образование"
+    )
 
     private lateinit var viewPager: ViewPager
-    private lateinit var prevButton: Button
-    private lateinit var nextButton: Button
+    private lateinit var progressBar: ProgressBar
 
-    //private lateinit val viewPager: ViewPager
-    private lateinit var pagerAdapter: FormPagerAdapter
+    private val fragmentPagesArray = arrayOf(
+        R.layout.fragment_page1,
+        R.layout.fragment_page2,
+        R.layout.fragment_page3,
+        /*R.layout.fragment_page4,
+        R.layout.fragment_page5,
+        R.layout.fragment_page6,
+        R.layout.fragment_page7,
+        R.layout.fragment_page8,
+        R.layout.fragment_page9,
+        R.layout.fragment_page10,
+        R.layout.fragment_page11,
+        R.layout.fragment_page_last*/
+    )
 
-
-
-
-    private fun setup() {
-        headersList.add("Фамилия")
-        headersList.add("Имя")
-        headersList.add("Отчество")
-        headersList.add("Пол")
-        headersList.add("Дата рождения")
-        headersList.add("Место рождения")
-        headersList.add("Гражданство")
-        /*headersList.add("Паспорт серия")
-        headersList.add("Паспорт номер")
-        headersList.add("Паспорт выдан")
-        headersList.add("Паспорт дата")
-        headersList.add("СНИЛС")
-        headersList.add("ИНН")
-        headersList.add("Номер телефона моб")
-        headersList.add("Номер телефона дом")
-        headersList.add("Почтовый индекс пасп")
-        headersList.add("Адрес пасп")
-        headersList.add("Почтовый индекс факт")
-        headersList.add("Адрес факт")
-        headersList.add("Состояние воен")
-        headersList.add("Воинское звание")*/
-    }
-
-    private fun getAnswers() {
-        answersList.add(findViewById<EditText>(R.id.editTextSurname).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextName).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextPatronymic).text.toString())
-
-        if (findViewById<CheckBox>(R.id.checkBoxSexM).isChecked) {
-            answersList.add("М")
-        }
-        else if (findViewById<CheckBox>(R.id.checkBoxSexF).isChecked) {
-            answersList.add("Ж")
-        }
-        else {
-            answersList.add("")
-        }
-
-        answersList.add(findViewById<EditText>(R.id.editTextBirthDay).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextBirthPlace).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextNationality).text.toString())
-        /*answersList.add(findViewById<EditText>(R.id.editTextPassportSerial).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextPassportNumber).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextPassportGivenBy).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextPassportGivenDate).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextSNILS).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextINN).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextPhoneMobile).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextPhoneHome).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextAddressPassportIndex).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextAddressPassport).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextAddressFactualIndex).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextAddressFactual).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextMilitaryStatus).text.toString())
-        answersList.add(findViewById<EditText>(R.id.editTextMilitaryRank).text.toString())*/
-
-
-
-    }
-
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form)
 
-        //setup()
-
-
         viewPager = findViewById(R.id.viewPager)
-        prevButton = findViewById(R.id.prevButton)
-        nextButton = findViewById(R.id.nextButton)
+
+        val homeButton: Button = findViewById(R.id.homeButton)
         val submitButton: Button = findViewById(R.id.submitButton)
 
-        val adapter = FormPagerAdapter(supportFragmentManager)
+        val adapter = FormPagerAdapter(supportFragmentManager, fragmentPagesArray, answersList)
         viewPager.adapter = adapter
+        progressBar = findViewById(R.id.progressBar)
 
-        prevButton.setOnClickListener {
-            if (viewPager.currentItem > 0) {
-                viewPager.currentItem = viewPager.currentItem - 1
-            }
-        }
+        updateActionBarTitle(0, titles)
 
-        nextButton.setOnClickListener {
-            if (viewPager.currentItem < adapter.count - 1) {
-                viewPager.currentItem = viewPager.currentItem + 1
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            override fun onPageSelected(position: Int) {
+                FormUtils.updateProgressBar(progressBar, position, adapter.count)
+                updateActionBarTitle(position, titles)
             }
+            override fun onPageScrollStateChanged(state: Int) {}
+        })
+
+        FormUtils.updateProgressBar(progressBar, viewPager.currentItem, adapter.count)
+
+        homeButton.setOnClickListener {
+            onBackButtonPressed()
         }
 
         submitButton.setOnClickListener {
-            saveFormData()
+            FormUtils.saveFormData(this, headersList, answersList)
         }
     }
 
-    class Page1Fragment : Fragment() {
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            val view = inflater.inflate(R.layout.fragment_page1, container, false)
-            // Инициализация элементов страницы и их логика
-            return view
-        }
-    }
-
-    class Page2Fragment : Fragment() {
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            val view = inflater.inflate(R.layout.fragment_page2, container, false)
-            // Инициализация элементов страницы и их логика
-            return view
-        }
-    }
-
-    class Page3Fragment : Fragment() {
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            val view = inflater.inflate(R.layout.fragment_page3, container, false)
-            // Инициализация элементов страницы и их логика
-            return view
-        }
-    }
-
-    class Page4Fragment : Fragment() {
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            val view = inflater.inflate(R.layout.fragment_page4, container, false)
-            // Инициализация элементов страницы и их логика
-            return view
-        }
-    }
-
-    class Page5Fragment : Fragment() {
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            val view = inflater.inflate(R.layout.fragment_page5, container, false)
-            // Инициализация элементов страницы и их логика
-            return view
-        }
-    }
-
-    class Page6Fragment : Fragment() {
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            val view = inflater.inflate(R.layout.fragment_page6, container, false)
-            // Инициализация элементов страницы и их логика
-            return view
-        }
-    }
-
-    class FormPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    class FormPagerAdapter(fm: FragmentManager, private val fragments: Array<Int>, private val answersList: MutableList<String>) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         override fun getCount(): Int {
-            return 6 // Количество страниц
+            return fragments.size // Количество страниц
         }
 
         override fun getItem(position: Int): Fragment {
-            return when (position) {
-                0 -> Page1Fragment() // Фрагмент для первой страницы
-                1 -> Page2Fragment() // Фрагмент для второй страницы
-                2 -> Page3Fragment() // Фрагмент для первой страницы
-                3 -> Page4Fragment() // Фрагмент для второй страницы
-                4 -> Page5Fragment() // Фрагмент для первой страницы
-                5 -> Page6Fragment() // Фрагмент для второй страницы
-                // Добавьте фрагменты для остальных страниц по аналогии
-                else -> throw IllegalArgumentException("Invalid position")
-            }
+            return PageFragment(fragments[position], position, answersList)
         }
     }
 
-    private fun saveFormData() {
-        setup()
-        getAnswers()
-
-        val data = StringBuilder()
-
-        // Добавляем заголовки
-        for (header in headersList) {
-            data.append(header).append(",")
-        }
-        data.deleteCharAt(data.length - 1) // Удалить последнюю запятую
-        data.append("\n")
-
-        // Добавляем данные
-        for (answer in answersList) {
-            data.append(answer).append(",")
-        }
-        data.deleteCharAt(data.length - 1) // Удалить последнюю запятую
-
-        try {
-            val file = File(getExternalFilesDir(null), "form_data.csv")
-            val fos: FileOutputStream = FileOutputStream(file)
-            //fos.write(data.toString().toByteArray(Charsets.UTF_8))
-            //fos.close()
-            val writer = OutputStreamWriter(fos, Charset.forName(("UTF-8")))
-            writer.write(data.toString())
-            writer.close()
-            Toast.makeText(this, "Данные сохранены: ${file.absolutePath}", Toast.LENGTH_SHORT).show()
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Toast.makeText(this, "Ошибка сохранения данных", Toast.LENGTH_SHORT).show()
-        }
+    private fun updateActionBarTitle(position: Int, titles: Array<String>) {
+        supportActionBar?.title = titles[position]
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun onBackButtonPressed() {
+        showExitConfirmationDialog()
+    }
 
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun showExitConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Выход")
+        builder.setMessage("Вы уверены, что хотите выйти?")
+        builder.setPositiveButton("Да") { dialogInterface: DialogInterface, _: Int ->
+            dialogInterface.dismiss()
+            goToMainMenu()
+        }
+        builder.setNegativeButton("Нет") { dialogInterface: DialogInterface, _: Int ->
+            dialogInterface.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun goToMainMenu() {
+        resetAll()
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N) // видимо будет работать только от андроид 7.0
+    private fun resetAll() {
+        val viewPager = findViewById<ViewPager>(R.id.viewPager)
+        val adapter = FormPagerAdapter(supportFragmentManager, fragmentPagesArray, answersList)
+
+        for (i in 0 until viewPager.childCount) {
+            val fragment = adapter.getItem(i) as PageFragment // заменить на PageFragment
+            val view = fragment.view
+
+            view?.findViewById<EditText>(R.id.editTextSurname)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextName)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextPatronymic)?.setText("")
+            view?.findViewById<RadioButton>(R.id.radioButtonMale)?.isChecked = false
+            view?.findViewById<RadioButton>(R.id.radioButtonFemale)?.isChecked = false
+            view?.findViewById<EditText>(R.id.editTextBirthDay)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextBirthPlace)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextNationality)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextPassportSerial)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextPassportNumber)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextPassportGivenBy)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextPassportGivenDate)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextSNILS)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextINN)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextPhoneMobile)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextPhoneHome)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextAddressPassportIndex)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextAddressPassport)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextAddressFactualIndex)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextAddressFactual)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextMilitaryStatus)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextMilitaryRank)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextMilitaryDocsSerial)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextMilitaryDocsNumber)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextMilitaryDocsFrom)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextMilitaryDocsDate)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducation)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationUni)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationDiploma)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationDate)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationDiplomaQual)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationDiplomaSpecialty)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationAfterUni)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationAfterUniName)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationAfterUniDoc)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationAfterUniYear)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationAfterUniSpecialty)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationScience)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationScienceDiploma)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationScienceRank)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationScienceRankSerial)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationScienceRankNumber)?.setText("")
+            view?.findViewById<EditText>(R.id.editTextEducationForeign)?.setText("")
+        }
+
+        headersList.clear()
+        answersList.replaceAll { "" }
+    }
 }

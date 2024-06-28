@@ -1,82 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:padding="16dp">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textViewAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Адрес места жительства" />
-    <TextView
-        android:id="@+id/textViewAddressPassport"
+        android:id="@+id/textViewEducation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="По паспорту" />
-    <EditText
-        android:id="@+id/editTextAddressPassportIndex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Почтовый индекс" />
+        android:text="Образование" />
 
     <EditText
-        android:id="@+id/editTextAddressPassport"
+        android:id="@+id/editTextEducation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Адрес" />
+        android:hint="Общее среднее, профессиональное, высшее" />
 
     <TextView
-        android:id="@+id/textViewAddressFactual"
+        android:id="@+id/textViewEducationUni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Фактический" />
-    <EditText
-        android:id="@+id/editTextAddressFactualIndex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Почтовый индекс" />
+        android:text="Наименование образовательного учреждения" />
 
     <EditText
-        android:id="@+id/editTextAddressFactual"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Адрес" />
-
-    <TextView
-        android:id="@+id/textViewMilitary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Отношение к воинской обязанности" />
-
-    <TextView
-        android:id="@+id/textViewMilitaryStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Призывник / военнообязанный(ая) / невоеннообязанный(ая)" />
-
-    <EditText
-        android:id="@+id/editTextMilitaryStatus"
+        android:id="@+id/editTextEducationUni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="" />
 
     <TextView
-        android:id="@+id/textViewMilitaryRank"
+        android:id="@+id/textViewEducationDiploma"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Воинское звание" />
+        android:text="Диплом, серия, номер" />
 
     <EditText
-        android:id="@+id/editTextMilitaryRank"
+        android:id="@+id/editTextEducationDiploma"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="" />
+
+    <TextView
+        android:id="@+id/textViewEducationDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Число, месяц, год окончания" />
+
+    <EditText
+        android:id="@+id/editTextEducationDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="" />
+
+    <TextView
+        android:id="@+id/textViewEducationDiplomaQual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Квалификация по диплому" />
+
+    <EditText
+        android:id="@+id/editTextEducationDiplomaQual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="" />
+
+    <TextView
+        android:id="@+id/textViewEducationDiplomaSpecialty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Направление или специальность по диплому" />
+
+    <EditText
+        android:id="@+id/editTextEducationDiplomaSpecialty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="" />
+
+    <TextView
+        android:id="@+id/textViewEducationAfterUni"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Послевузовское профессиональное образование" />
+
+    <EditText
+        android:id="@+id/editTextEducationAfterUni"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Аспирантура, адъюнктура, докторантура" />
+
+    <TextView
+        android:id="@+id/textViewEducationAfterUniName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Наименование образовательного, научного учреждения" />
+
+    <EditText
+        android:id="@+id/editTextEducationAfterUniName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="" />
+
+    <TextView
+        android:id="@+id/textViewEducationAfterUniDoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Удостоверение, номер, дата выдачи" />
+
+    <EditText
+        android:id="@+id/editTextEducationAfterUniDoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="" />
+
+    <TextView
+        android:id="@+id/textViewEducationAfterUniYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Год окончания" />
+
+    <EditText
+        android:id="@+id/editTextEducationAfterUniYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="" />
+
+    <TextView
+        android:id="@+id/textViewEducationAfterUniSpecialty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Специальность" />
+
+    <EditText
+        android:id="@+id/editTextEducationAfterUniSpecialty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="" />
+
+    <TextView
+        android:id="@+id/textViewEducationScience"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Ученая степень" />
+
+    <EditText
+        android:id="@+id/editTextEducationScience"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="" />
+
+    <TextView
+        android:id="@+id/textViewEducationScienceDiploma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Диплом" />
+
+    <EditText
+        android:id="@+id/editTextEducationScienceDiploma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Номер, серия, дата выдачи, наименование организации, выдавшей диплом" />
+
+    <TextView
+        android:id="@+id/textViewEducationScienceRank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Ученое звание" />
+
+    <EditText
+        android:id="@+id/editTextEducationScienceRank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="" />
+
+    <TextView
+        android:id="@+id/textViewEducationScienceRankText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Аттестат" />
+
+    <EditText
+        android:id="@+id/editTextEducationScienceRankSerial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Серия" />
+
+    <EditText
+        android:id="@+id/editTextEducationScienceRankNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="№" />
+
+    <TextView
+        android:id="@+id/textViewEducationForeign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Знание иностранных языков, языков народов РФ" />
+
+    <EditText
+        android:id="@+id/editTextEducationForeign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Наименование языка, степень знания языка" />
 
 </LinearLayout>
+</ScrollView>
